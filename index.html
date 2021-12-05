@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+    <title>challenge</title>
+    <style type="text/css" media="all">
+    html{
+      touch-action: manipulation;
+      font-size: 40px;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Ubuntu&display=swap');
+    @keyframes popp{
+      0%{transform:scale(0);}
+      100%{transform:scale(1.1);}
+    }
+    @keyframes breath{
+      0%{transform:scale(0.6)}
+      50%{transform:scale(0.64); top:15.8%;}
+      100%{transform:scale(0.6)}
+    }
+    @keyframes fall{
+      0%{
+        top: 18%;
+        left: 13%;
+        transform: scale(0.7);
+      }
+      50%{
+        top: 42%;
+        left: -35%;
+        transform: scale(0.7) rotate(-90deg);}
+        100%{
+          top: 58%;
+        left: -45%;
+        transform: scale(0.7) rotate(-90deg);
+        }
+      }
+      .bridge{
+        position: absolute;
+        top: 33%;
+      }
+      #man{
+        transform: scale(0.6);
+        position: absolute;
+        top: 17%;
+        left: 13%;
+        animation-name: breath;
+        animation-duration: 2.5s;
+        animation-iteration-count: infinite;
+      }
+      #data{
+        width: 130%;
+        height: 530px;
+        background-color: #73cae0be;
+        position: absolute;
+        top: 100%;
+        left: 0%;
+      }
+      #pop{
+        width: 65%;
+        height: 450px;
+        border: ridge #c0ac74 20px;
+        position: absolute;
+        left: 30%;
+        top: 33%;
+        background-color: white;
+        transform: scale(1.1);
+        animation-name: popp;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        display: block;
+      }
+      #text{
+        margin: 40px;
+        position: absolute;
+        top: 20%;
+        text-align: center;
+        font-family: 'Ubuntu', sans-serif;
+      }
+      #cancell{
+        border: solid #060505 3px;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        color: red;
+        position: absolute;
+        top: -10%;
+        left:85%;
+      }
+      .title{
+        font-family: 'Bebas Neue', cursive;
+        position: absolute;
+        left: 40%;
+        font-size: 120px;
+        border: solid #abd5e0 10px;
+        border-radius: 30px;
+      }
+      #hint{
+        font-family: 'Bebas Neue', cursive;
+        position: absolute;
+        left: 110%;
+        font-size: 120px;
+        border: solid #abd5e0 10px;
+        border-radius: 30px;
+        display:none;
+      }
+      audio{ display:none;}
+    </style>
+  </head>
+<body>
+  <h1 class="title">Challenge</h1>
+  <h1 id="hint" onclick="ideaa()">💡</h1>
+  <h1 id="data"> </h1>
+  <img class="bridge" src="Bridge.png" alt="loading..." />
+  <img id="man" src="Funnyman.png" alt="loading..." />
+  <div id="pop">
+    <h2 id="text">Challenge:
+    make this naughty kid fall into that pool</h2>
+    <h1 id="cancell" onclick="closse()">×</h1>
+  </div>
+   <audio controls loop hidden="true" id="music">
+    <source src="Water.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+    </audio>
+     <audio hidden="true" id="musicc">
+    <source src="Scream.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
+<script type="text/javascript" charset="utf-8">
+var started = false;
+var date = new Date();
+var start = date.getMinutes();
+var end = 0;
+var ttime = 0;
+var ended = false;
+var song = document.getElementById("music");
+var scream = document.getElementById("musicc");
+function timee(){
+  setInterval(function timee(){
+    ttime+=1;
+  },1000)
+}
+timee();
+let details = navigator.userAgent;
+let regexp = /android|iphone|kindle|ipad/i;
+let isMobileDevice = regexp.test(details); 
+ if (isMobileDevice){ 
+    console.log("all fine");
+    } 
+ else{ 
+       alert("hello! this project is compatible only for mobile devices and if you are using any other device, then this challenge may not be completed, if you are using a mobile device then please ignore this");
+        } 
+  window.addEventListener('devicemotion', event => {
+  if(started == true){
+  if(event.acceleration.x >= 7 || event.acceleration.x <= -7){
+    document.getElementById("man").style.animationName="fall"
+    document.getElementById("man").style.animationIterationCount="1"
+    document.getElementById("man").style.top="58%"
+    document.getElementById("man").style.left="-45%"
+    document.getElementById("man").style.transform="scale(0.7) rotate(-90deg)"
+    scream.play();
+    document.getElementById("text").innerText="Congratulations!🎉 you completed this challenge in "+ttime+" seconds. Please rate this one 😅 on programming hero - Yashas slk 😄"
+  document.getElementById("pop").style.display="block"
+  document.getElementById("pop").style.height="750px"
+  ended = true;
+  }}
+});
+function closse(){
+  document.getElementById("pop").style.display="none"
+  document.getElementById("hint").style.display="block"
+  started = true;
+  song.play();
+}
+function ideaa(){
+  document.getElementById("text").innerText="Create Earthquake! 💥-Yashas"
+  document.getElementById("pop").style.display="block"
+}
+</script>
